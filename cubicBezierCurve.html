@@ -1,13 +1,10 @@
-<!--// This program is licensed under the GNU GPL. More information here: https://en.wikipedia.org/wiki/GNU_General_Public_License-->
-<!--// TL;DR: You are free to use any of the code as long as you only publish the code within a project that has the same license.-->
-
 <!DOCTYPE html>
 
 <html>
 
 <head>
 
-	<title>Bezier Curve Demo</title>
+	<title>Cubic Bezier Curve</title>
 
 	<style type="text/css">
 		body {
@@ -15,7 +12,7 @@
 			overflow: hidden;
 		}
 		#canvas {
-			background-color: #f9f3d8;/*--- vanilla || lightgrey*/
+			background-color: #f9f3d8;
 		}
 	</style>
 
@@ -235,7 +232,7 @@
 		function calculateCurve() { // Really efficient because there are no function calls
 			curvePoints = [];
 			
-			for (var n = 0; n < quality + 1; n++) { // x lines need x+1 points
+			for (var n = 0; n < quality + 1; n++) { // N lines need N+1 points
 				greenPoints[0] = {x: (handles[0].x - points[0].x) * n/quality + points[0].x, y: (handles[0].y - points[0].y) * n/quality + points[0].y};
 				greenPoints[1] = {x: (handles[1].x - handles[0].x) * n/quality + handles[0].x, y: (handles[1].y - handles[0].y) * n/quality + handles[0].y};
 				greenPoints[2] = {x: (points[1].x - handles[1].x) * n/quality + handles[1].x, y: (points[1].y - handles[1].y) * n/quality + handles[1].y};
