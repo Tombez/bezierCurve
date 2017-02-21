@@ -181,6 +181,10 @@ function drawFrame() {
 	ctx.moveTo(curvePoints[curvePoints.length-1].x + 5, curvePoints[curvePoints.length-1].y);
 	ctx.arc(curvePoints[curvePoints.length-1].x, curvePoints[curvePoints.length-1].y, 5, 0, 2 * Math.PI);
 	ctx.fill();
+	
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = 2;
+	ctx.strokeRect(1, 1, canvas.width - 2, canvas.width - 2);
 }
 
 function getPointAlongCurveAt(percent) { // Returns where the virtual penpoint is at a given percent in the curve.

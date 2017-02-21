@@ -210,6 +210,10 @@ function drawFrame() {
 	
 	ctx.fillText("Made By: Tom Burris", canvas.width - 220, canvas.height - 10);
 	
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = 2;
+	ctx.strokeRect(1, 1, canvas.width - 2, canvas.width - 2);
+	
 	if (animationInterval) {
 		if (animationProgress >= quality) {
 			clearInterval(animationInterval);

@@ -14,7 +14,7 @@
 			background: black;
 		}
 		iframe {
-			border: 1px solid black;
+			border: 0px;
 			margin: 0px;
 			padding: 0px;
 			display: block;
@@ -35,7 +35,7 @@
 		var resize;
 		
 		window.addEventListener("resize", resize = function() {
-			var dimension = Math.min(Math.max(window.innerWidth, window.innerHeight) / 2, window.innerWidth, window.innerHeight) - 2;
+			var dimension = Math.min(Math.max(window.innerWidth, window.innerHeight) / 2, window.innerWidth, window.innerHeight);
 			iframe1.width = dimension;
 			iframe1.height = dimension;
 			iframe2.width = dimension;
