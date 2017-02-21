@@ -26,7 +26,7 @@ initCtrlPoints();
 
 ctx.strokeStyle = "black";
 ctx.fillStyle = "black";
-ctx.font = "20px Verdana";
+ctx.font = "18px Verdana";
 ctx.lineWidth = 2;
 drawFrame();
 

@@ -109,7 +109,7 @@ function drawFrame() {
 	}
 	
 	// Draw the stuff
-	ctx.font = "20px Verdana";
+	ctx.font = "18px Verdana";
 	ctx.lineWidth = 2;
 	
 	
