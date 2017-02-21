@@ -214,11 +214,10 @@ function initCtrlPoints() {
 		points[0][n] = {x: Math.cos(angle)*r + canvas.width/2, y: Math.sin(angle)*r + canvas.height/2};
 	}
 }
-
-function triSum(num) {
+/*function triSum(num) {
 	if(num == 1) {
 		return 1;
 	} else {
 		return num + triSum(num -1);
 	}
-}
+}*/
