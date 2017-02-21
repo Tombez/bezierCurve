@@ -35,7 +35,7 @@
 		var resize;
 		
 		window.addEventListener("resize", resize = function() {
-			var dimension = Math.min(Math.max(window.innerWidth, window.innerHeight) / 2, window.innerWidth, window.innerHeight);
+			var dimension = Math.min(Math.max(window.innerWidth, window.innerHeight) / 2, window.innerWidth, window.innerHeight) - 2;
 			iframe1.width = dimension;
 			iframe1.height = dimension;
 			iframe2.width = dimension;
