@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<title>Bezier Curve</title>
+	
+	<style type="text/css">
+		body {
+			margin: 0px;
+			padding: 0px;
+			overflow: hidden;
+			background: black;
+		}
+		iframe {
+			border: 0px;
+			margin: 0px;
+			padding: 0px;
+			display: block;
+			float: left;
+		}
+	</style>
+	
+</head>
+
+<body>
+
+	<iframe id="iframe1" src="./cubicBezierCurve" frameborder=0></iframe>
+	<iframe id="iframe2" src="./highOrderBezierCurve" frameborder=0></iframe>
+
+	<script type="text/javascript">
+		var iframe1 = document.getElementById("iframe1");
+		var iframe2 = document.getElementById("iframe2");
+		var resize;
+		
+		window.addEventListener("resize", resize = function() {
+			var dimension = Math.min(Math.max(window.innerWidth, window.innerHeight) / 2, window.innerWidth, window.innerHeight);
+			iframe1.width = dimension;
+			iframe1.height = dimension;
+			iframe2.width = dimension;
+			iframe2.height = dimension;
+		});
+		resize();
+	</script>
+	
+</body>
+
+</html>
