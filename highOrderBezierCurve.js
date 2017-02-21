@@ -1,5 +1,5 @@
 /* User Definable Variables */
-var numOfCtrlPoints = 5;
+var numOfCtrlPoints = 22;
 var quality = 100 + (10 * numOfCtrlPoints); // how many lines are used to model the curve
 var framerate = 30; // fps (only applies when moving control points)
 var animationTime = 5; // in seconds
@@ -13,7 +13,7 @@ var colors = ["#E25822", "#222222", "#F3C300", "#875692", "#F38400", "#A1CAF1", 
 var canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-var context = canvas.getContext("2d");
+var ctx = canvas.getContext("2d");
 var points = [];
 var curvePoints = [];
 var pointer = {};
@@ -24,10 +24,10 @@ var animationProgress = 0;
 
 initCtrlPoints();
 
-context.strokeStyle = "black";
-context.fillStyle = "black";
-context.font = "20px Verdana";
-context.lineWidth = 2;
+ctx.strokeStyle = "black";
+ctx.fillStyle = "black";
+ctx.font = "20px Verdana";
+ctx.lineWidth = 2;
 drawFrame();
 
 canvas.addEventListener("mousedown", function(event) {
@@ -98,63 +98,65 @@ function drawFrame() {
 		points[0][pointHeld].y = pointer.y;
 	}
 	
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#f9f3d8";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
+	ctx.fillStyle = "black";
 	if (!animationInterval) {
 		curvePoints = [];
 		for (var n = 0; n < quality + 1; n++) { // Calculate entire curve.
 			curvePoints.push(getPointAlongCurveAt(n/quality));
 		}
 		
-		context.fillText("You can click & drag points. A = Animate, W = Random, R = Reset.", 10, 30);
+		ctx.fillText("You can click & drag points. A = Animate, W = Random, R = Reset.", 10, 30);
 	} else {
 		curvePoints.push(getPointAlongCurveAt(animationProgress/quality));
 	}
-	context.fillText("Made By: Tom Burris", canvas.width - 220, canvas.height - 10);
+	ctx.fillText("Made By: Tom Burris", canvas.width - 220, canvas.height - 10);
 	
-	context.beginPath(); // (draw) Anchor points.
-	context.moveTo(points[0][0].x + 5, points[0][0].y);
-	context.arc(points[0][0].x, points[0][0].y, 5, 0, 2 * Math.PI);
-	context.moveTo(points[0][numOfCtrlPoints+1].x + 5, points[0][numOfCtrlPoints+1].y);
-	context.arc(points[0][numOfCtrlPoints+1].x, points[0][numOfCtrlPoints+1].y, 5, 0, 2 * Math.PI);
-	context.fill();
+	ctx.beginPath(); // (draw) Anchor points.
+	ctx.moveTo(points[0][0].x + 5, points[0][0].y);
+	ctx.arc(points[0][0].x, points[0][0].y, 5, 0, 2 * Math.PI);
+	ctx.moveTo(points[0][numOfCtrlPoints+1].x + 5, points[0][numOfCtrlPoints+1].y);
+	ctx.arc(points[0][numOfCtrlPoints+1].x, points[0][numOfCtrlPoints+1].y, 5, 0, 2 * Math.PI);
+	ctx.fill();
 	
-	context.beginPath(); // (draw) Control Points.
+	ctx.beginPath(); // (draw) Control Points.
 	for (var n = 1; n < numOfCtrlPoints + 1; n++) {
-		context.moveTo(points[0][n].x + 10, points[0][n].y);
-		context.arc(points[0][n].x, points[0][n].y, 10, 0, 2 * Math.PI);
+		ctx.moveTo(points[0][n].x + 10, points[0][n].y);
+		ctx.arc(points[0][n].x, points[0][n].y, 10, 0, 2 * Math.PI);
 	}
-	context.stroke();
+	ctx.stroke();
 	
-	context.beginPath(); // (draw) Handles.
-	context.setLineDash([6, 18]);
+	ctx.beginPath(); // (draw) Handles.
+	ctx.setLineDash([6, 18]);
 	for (var n = 0; n + 1 < points[0].length; n++) {
-		context.moveTo(points[0][n].x, points[0][n].y); // have this to prevent it acting like one continuous thread when moved.
-		context.lineTo(points[0][n+1].x, points[0][n+1].y);
+		ctx.moveTo(points[0][n].x, points[0][n].y); // have this to prevent it acting like one continuous thread when moved.
+		ctx.lineTo(points[0][n+1].x, points[0][n+1].y);
 	}
-	context.stroke();
-	context.setLineDash([]);
+	ctx.stroke();
+	ctx.setLineDash([]);
 	
 	if (animationInterval) {
-		context.beginPath(); // (draw) Constructor lines.
+		ctx.beginPath(); // (draw) Constructor lines.
 		for (var i = 1; i < points.length; i++) {
-			context.strokeStyle = colors[(i-1) % 22];
-			context.fillStyle = context.strokeStyle;
-			context.beginPath();
-			context.moveTo(points[i][0].x, points[i][0].y);
+			ctx.strokeStyle = colors[(i-1) % 22];
+			ctx.fillStyle = ctx.strokeStyle;
+			ctx.beginPath();
+			ctx.moveTo(points[i][0].x, points[i][0].y);
 			for (var n = 1; n < points[i].length; n++) {
-				context.lineTo(points[i][n].x, points[i][n].y);
+				ctx.lineTo(points[i][n].x, points[i][n].y);
 			}
-			context.stroke();
-			context.beginPath();// (draw) Constructor points.
+			ctx.stroke();
+			ctx.beginPath();// (draw) Constructor points.
 			for (var n = 0; n < points[i].length; n++) {
-				context.moveTo(points[i][n].x + 5, points[i][n].y);
-				context.arc(points[i][n].x, points[i][n].y, 5, 0, 2 * Math.PI);
+				ctx.moveTo(points[i][n].x + 5, points[i][n].y);
+				ctx.arc(points[i][n].x, points[i][n].y, 5, 0, 2 * Math.PI);
 			}
-			context.fill();
+			ctx.fill();
 		}
-		context.strokeStyle = "black";
-		context.fillStyle = "black";
+		ctx.strokeStyle = "black";
+		ctx.fillStyle = "black";
 		
 		if (animationProgress >= quality) {
 			clearInterval(animationInterval);
@@ -166,19 +168,19 @@ function drawFrame() {
 		animationProgress++;
 	}
 	
-	context.beginPath(); // (draw) Curve.
-	context.strokeStyle = "darkblue";
-	context.moveTo(curvePoints[0].x, curvePoints[0].y);
+	ctx.beginPath(); // (draw) Curve.
+	ctx.strokeStyle = "darkblue";
+	ctx.moveTo(curvePoints[0].x, curvePoints[0].y);
 	for (var n = 1; n < curvePoints.length; n++) {
-		context.lineTo(curvePoints[n].x, curvePoints[n].y);
+		ctx.lineTo(curvePoints[n].x, curvePoints[n].y);
 	}
-	context.stroke();
-	context.strokeStyle = "black";
+	ctx.stroke();
+	ctx.strokeStyle = "black";
 
-	context.beginPath(); // (draw) Virtual penpoint.
-	context.moveTo(curvePoints[curvePoints.length-1].x + 5, curvePoints[curvePoints.length-1].y);
-	context.arc(curvePoints[curvePoints.length-1].x, curvePoints[curvePoints.length-1].y, 5, 0, 2 * Math.PI);
-	context.fill();
+	ctx.beginPath(); // (draw) Virtual penpoint.
+	ctx.moveTo(curvePoints[curvePoints.length-1].x + 5, curvePoints[curvePoints.length-1].y);
+	ctx.arc(curvePoints[curvePoints.length-1].x, curvePoints[curvePoints.length-1].y, 5, 0, 2 * Math.PI);
+	ctx.fill();
 }
 
 function getPointAlongCurveAt(percent) { // Returns where the virtual penpoint is at a given percent in the curve.

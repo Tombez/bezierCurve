@@ -25,8 +25,8 @@ window.addEventListener("resize", resize = function() {
 	drawFrame();
 });
 resize();
-points = [{x: canvas.width*1/4, y: canvas.height*3/4}, {x: canvas.width*3/4, y: canvas.height*3/4}];
-handles = [{x: canvas.width*1/4, y: canvas.height*1/4}, {x: canvas.width*3/4, y: canvas.height*1/4}];
+points = [{x: canvas.width*1/8, y: canvas.height*3/4}, {x: canvas.width*7/8, y: canvas.height*3/4}];
+handles = [{x: canvas.width*1/8, y: canvas.height*1/4}, {x: canvas.width*7/8, y: canvas.height*1/4}];
 drawFrame();
 canvas.addEventListener("mousedown", function(event) {
 	if (drawInterval) {
@@ -72,8 +72,8 @@ window.addEventListener("keyup", function(event) {
 		animationInterval = setInterval(drawFrame, animationTime*1000/quality);
 	} else if (event.keyCode == 82) { // key R (Reset)
 		mouseup();
-		points = [{x: canvas.width*1/4, y: canvas.height*3/4}, {x: canvas.width*3/4, y: canvas.height*3/4}];
-		handles = [{x: canvas.width*1/4, y: canvas.height*1/4}, {x: canvas.width*3/4, y: canvas.height*1/4}];
+		points = [{x: canvas.width*1/8, y: canvas.height*3/4}, {x: canvas.width*7/8, y: canvas.height*3/4}];
+		handles = [{x: canvas.width*1/8, y: canvas.height*1/4}, {x: canvas.width*7/8, y: canvas.height*1/4}];
 		curvePoints = [];
 		animationProgress = 0;
 		drawFrame();
@@ -117,6 +117,7 @@ function drawFrame() {
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
 	if (!animationInterval) {
+		ctx.fillStyle = "black";
 		ctx.fillText("You can click and drag points. A = Animate, W = Random, R = Reset.", 5, 25);
 	}
 	
