@@ -1,5 +1,8 @@
+<<<<<<< HEAD
+=======
 <!-- This program is licensed under the GPLv3 License by Tom Burris -->
 <!DOCTYPE html>
+>>>>>>> master
 <html>
 <head>
 	<title>Heart</title>
@@ -11,11 +14,18 @@
 		}
 	</style>
 </head>
+<<<<<<< HEAD
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+	"use strict";
+=======
 
 <body>
 	<canvas id="canvas"></canvas>
 	<script>
 	'use strict';
+>>>>>>> master
 
 	let maxCtrlPoints = Number.POSITIVE_INFINITY;
 	let animationTime = 3; // seconds.
@@ -87,7 +97,11 @@
 		// Clear canvas.
 		ctx.fillStyle = "#000";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> master
 		// Construction lines.
 		for (let n = 0; n < _points.length; n++) {
 			ctx.fillStyle = ctx.strokeStyle = "hsl(" + ~~((n / (_points.length - 1)) * 360) + ", 100%, 50%)";
@@ -124,4 +138,8 @@
 	ctrlPointLoop();
 	</script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> master
